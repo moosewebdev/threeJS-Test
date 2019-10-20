@@ -26,15 +26,9 @@ loader.load('models/tokyo/scene.gltf', function (gltf) {
 	scene.add(gltf.scene);
 	var mesh;
 
-// Create an AnimationMixer, and get the list of AnimationClip instances
-var mixer = new THREE.AnimationMixer( mesh );
-var clips = mesh.animations;
-}, undefined, function (error) {
 
-	console.error(error);
 
 });
-
 
 
 render();
