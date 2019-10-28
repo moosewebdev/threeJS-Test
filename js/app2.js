@@ -4,36 +4,44 @@ var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHei
 
 //add light
 
-var hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
-hemiLight.position.set( 0, 300, 0 );
-scene.add( hemiLight );
-var dirLight = new THREE.DirectionalLight( 0xffffff );
-dirLight.position.set( 75, 300, -75 );
-scene.add( dirLight );
+var hemiLight = new THREE.HemisphereLight(0xffffff);
+hemiLight.position.set(0, 300, 0);
+scene.add(hemiLight);
+var dirLight = new THREE.DirectionalLight(0xffffff);
+dirLight.position.set(75, 300, -75);
+scene.add(dirLight);
 
 
+//camera position
+camera.position.z = 650;
 
-camera.position.z = 1000;
 //create renderer and append to html
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+//create a loader for object
 var loader = new THREE.GLTFLoader();
 
+//load in model from file path
 loader.load('models/tokyo/scene.gltf', function (gltf) {
 
-	scene.add(gltf.scene);
-	var mesh;
-
-
-
+    // add model to scene
+    scene.add(gltf.scene);
 });
 
+//render();
 
-render();
-        function render() {
 
-            renderer.render(scene, camera);
-            requestAnimationFrame(render);
-        }
+
+animate();
+
+
+
+//animate and render scene
+function animate() {
+
+    requestAnimationFrame(animate);
+    scene.rotation.y += 0.01;
+    renderer.render(scene, camera);
+};
